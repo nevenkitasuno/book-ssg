@@ -1,0 +1,19 @@
+.DS_Store
+
+# Build artifacts
+/ssg
+/bin/
+/dist/
+
+# Local generated output
+/output/
+/public/
+/tmp/
+
+# Go test and coverage artifacts
+*.test
+*.out
+coverage.out
+
+# Local tool caches
+.cache/

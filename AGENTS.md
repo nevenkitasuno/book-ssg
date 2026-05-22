@@ -1,19 +1,30 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-`cmd/ssg` contains the CLI entrypoint for the static site generator. Core application logic lives under `internal/`: `internal/app/site` builds pages, `internal/infra/content` loads Markdown content and topic metadata, `internal/infra/render` handles HTML templates, and `internal/infra/state` tracks incremental build state. Source content lives in `content/`, templates in `templates/`, and generated site files in `output/`. Do not hand-edit `output/`; regenerate it from source.
+
+`cmd/ssg` contains the CLI entrypoint. Core orchestration lives in `internal/app/sitegen`. Domain types and invariants are in `internal/domain/*`. Filesystem loading and HTML rendering live in `internal/infra/contentloader` and `internal/infra/render`. Reusable helpers are in `pkg/*` (`frontmatter`, `preview`, `theme`, `assets`). Templates are embedded from `internal/infra/render/templates`. Example content fixtures live under `examples/content`. Design docs live under `docs/`.
 
 ## Build, Test, and Development Commands
-Use `go run ./cmd/ssg` to build the site with default paths. Override directories when needed with `go run ./cmd/ssg -content content -templates templates -output output`. Run `go test ./...` to execute all unit tests. Use `go build ./cmd/ssg` for a compile-only verification of the CLI. GitHub Pages deploys the contents of `output/` from `.github/workflows/static.yml`.
+
+- `go run ./cmd/ssg --content examples/content --output /private/tmp/blog-ssg-output` generates the sample site.
+- `go test ./...` runs the full test suite.
+- `go build ./cmd/ssg` builds the CLI binary.
+- `gofmt -w <file>` formats changed Go files.
+
+Use `examples/content` as the default local fixture unless a task explicitly needs a different content tree.
 
 ## Coding Style & Naming Conventions
-Follow standard Go formatting: run `gofmt -w` on changed files before submitting. Keep package names short and lowercase. Exported identifiers use `CamelCase`; unexported helpers use `camelCase`. Tests in this repo prefer table-driven cases where behavior branches, with clear failure messages such as `got`/`want`. For content directories, follow the documented pattern `content/<Topic>/<YYYY MM Title>/1.md`; an optional day segment is supported as `YYYY MM DD Title`.
+
+Use standard Go formatting and keep files `gofmt`-clean. Prefer small packages with narrow responsibilities. Keep domain code free from CLI, filesystem, and HTML concerns. Use descriptive names: `Topic`, `Publication`, `PublicationPage`, `ThemeTokens`. Publication directories must follow `YYYY-MM-DD-slug`; page files must be `1.md`, `2.md`, etc.
+
+For templates and CSS, preserve the current split: HTML in `.tmpl` files, shared styling in `base.css`, and theme tokens flowing through `Config.yaml`.
 
 ## Testing Guidelines
-Place tests next to the code they cover as `*_test.go`. Current coverage centers on `internal/app/site` and `internal/infra/content`; extend those suites when changing rendering, slugging, content parsing, or topic metadata behavior. Prefer `t.TempDir()` for filesystem fixtures and small inline Markdown samples to exercise parser edge cases. Run `go test ./...` before opening a PR.
+
+Tests use Go’s standard `testing` package. Keep tests next to the code they cover with `_test.go` suffix. Prefer table-driven tests for parsers and domain helpers. When changing generation behavior, run `go test ./...` and regenerate the sample site locally to inspect output paths and HTML structure.
 
 ## Commit & Pull Request Guidelines
-Recent history uses short Conventional Commit prefixes such as `feat:`, `fix:`, and `docs:`. Keep commit subjects imperative and specific, for example `fix: preserve custom inline tag output`. PRs should describe the user-visible change, note any content or template migrations, link related issues, and include screenshots when HTML or theme output changes.
 
-## Content & Deployment Notes
-Topic assets and metadata belong in `content/<Topic>/meta/` (`Links.md`, `Config.yaml`, images). Use `link_name` in `Config.yaml` when a topic should publish under a custom `topics/<segment>/` path. Because deployment uploads `./output` directly, verify generated pages locally before merging.
+Recent history uses short conventional-style subjects such as `feat: new header` and `feat: better hover shadow`. Follow that pattern: `feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`. Keep subjects imperative and concise.
+
+PRs should describe the user-visible change, list validation commands run, and include screenshots or generated HTML snippets for template/CSS changes. If content structure or theme keys change, mention required updates to `examples/content/.../meta/Config.yaml`.

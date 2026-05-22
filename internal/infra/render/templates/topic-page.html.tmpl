@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{.Title}}</title>
+<link rel="stylesheet" href="{{.SiteRootPath}}style.css">
+{{if .FaviconPath}}<link rel="icon" href="{{.FaviconPath}}" type="image/x-icon">{{end}}
+<style>{{.ThemeCSS}}</style>
+</head>
+<body class="page-shell">
+<header class="site-header">
+<a class="topic-home" href="{{.TopicHomePath}}">{{.TopicTitle}}</a>
+</header>
+<main class="content-shell">
+<h1 class="page-title">{{.Title}}</h1>
+{{.BodyHTML}}
+</main>
+</body>
+</html>

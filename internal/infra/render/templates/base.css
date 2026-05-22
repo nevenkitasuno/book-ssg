@@ -1,0 +1,335 @@
+.page-shell {
+	min-height: 100vh;
+}
+
+.content-shell {
+	max-width: 42rem;
+	margin: 0 auto;
+}
+
+.topic-shell {
+	max-width: 42rem;
+	margin: 0 auto;
+}
+
+.topic-hero {
+	position: relative;
+	margin-bottom: 2rem;
+}
+
+.topic-hero-with-banner {
+	min-height: 18rem;
+	display: flex;
+	align-items: flex-end;
+	overflow: hidden;
+	border-radius: 1rem;
+}
+
+.topic-hero-with-banner::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-overlay) 18%, transparent) 0%,
+			color-mix(in srgb, var(--color-overlay) 38%, transparent) 40%,
+			color-mix(in srgb, var(--color-overlay) 82%, transparent) 100%
+		);
+	z-index: 1;
+}
+
+.topic-hero-content {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	padding: 1.5rem;
+}
+
+.topic-hero-with-banner .topic-hero-content {
+	color: var(--color-inverse-text);
+}
+
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
+}
+
+.topic-home {
+	font-weight: 700;
+}
+
+.topic-list {
+	margin: 1.5rem 0;
+	padding-left: 1.25rem;
+}
+
+.page-title {
+	margin-top: 0;
+}
+
+.topic-hero .page-title {
+	margin-bottom: 0.75rem;
+}
+
+.page-title a {
+	color: inherit;
+}
+
+.page-title a:hover,
+.page-title a:focus,
+.page-title a:active {
+	color: inherit;
+}
+
+.year-section {
+	margin-top: 3rem;
+}
+
+.year-section h2 {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.year-grid-wrap {
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	padding: 0 1.5rem;
+}
+
+.card-grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1.25rem;
+}
+
+.post-card {
+	position: relative;
+	flex: 0 0 14rem;
+	width: 14rem;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid var(--color-border);
+	border-radius: 1rem;
+	background: var(--color-surface);
+}
+
+.post-card-media {
+	position: relative;
+	display: block;
+}
+
+.post-card-media-link {
+	display: block;
+}
+
+.post-card-media img {
+	width: 100%;
+	height: 18rem;
+	object-fit: cover;
+	padding: 0;
+}
+
+.post-card-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 1rem 1rem 1.1rem;
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-overlay) 18%, transparent) 0%,
+			color-mix(in srgb, var(--color-overlay) 42%, transparent) 45%,
+			color-mix(in srgb, var(--color-overlay) 82%, transparent) 100%
+		);
+	color: var(--color-inverse-text);
+}
+
+.post-card-overlay::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-overlay) 74%, transparent) 0%,
+			color-mix(in srgb, var(--color-overlay) 86%, transparent) 45%,
+			color-mix(in srgb, var(--color-overlay) 95%, transparent) 100%
+		);
+	opacity: 0;
+	transition: opacity 160ms ease-out;
+	pointer-events: none;
+}
+
+.post-card:hover .post-card-overlay::before {
+	opacity: 1;
+}
+
+.post-card-overlay h3,
+.post-card-overlay .post-date,
+.post-card-overlay p {
+	position: relative;
+	z-index: 1;
+	color: inherit;
+}
+
+.post-card-overlay h3 {
+	margin: 0.45rem 0 0.35rem;
+}
+
+.post-card-overlay h3 a {
+	color: inherit;
+}
+
+.post-card h3 a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+
+.post-card-overlay .post-date {
+	margin: 0 0 0.5rem;
+	color: color-mix(in srgb, var(--color-inverse-text) 82%, transparent);
+}
+
+.post-card-overlay p:last-child {
+	margin-bottom: 0;
+}
+
+.post-card-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	min-height: 18rem;
+	padding: 1rem 1rem 1.1rem;
+}
+
+.post-card h3 {
+	margin: 0.35rem 0 0.5rem;
+}
+
+.post-card-body h3 {
+	margin: 0.45rem 0 0.35rem;
+}
+
+.post-card-body .tag-list {
+	margin: 0;
+}
+
+.post-card-body .post-date {
+	margin: 0 0 0.5rem;
+}
+
+.post-card-body p:last-child {
+	margin-bottom: 0;
+}
+
+.post-date {
+	margin: 0 0 0.75rem;
+	color: var(--color-muted);
+	font-size: 0.95rem;
+}
+
+.tag-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	padding: 0;
+	margin: 0 0 1rem;
+	list-style: none;
+}
+
+.tag-list li {
+	margin: 0;
+}
+
+.tag-list a,
+.tag-list-static li {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.18rem 0.5rem;
+	border-radius: 999px;
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	font-size: 0.67rem;
+	line-height: 1.15;
+}
+
+.tag-list-overlay {
+	position: static;
+	margin: 0;
+}
+
+.tag-list-overlay li {
+	margin: 0;
+}
+
+.tag-list-overlay a {
+	position: relative;
+	z-index: 2;
+	padding: 0.16rem 0.42rem;
+	background: color-mix(in srgb, var(--color-overlay) 58%, transparent);
+	backdrop-filter: blur(4px);
+	color: var(--color-inverse-text);
+	border-color: color-mix(in srgb, var(--color-inverse-text) 24%, transparent);
+}
+
+.post-card-body .tag-list a {
+	position: relative;
+	z-index: 2;
+}
+
+.page-nav {
+	display: flex;
+	gap: 1rem;
+	margin-top: 2rem;
+}
+
+.made-with {
+	margin-top: 2.5rem;
+	color: var(--color-muted);
+	font-size: 0.9rem;
+}
+
+.made-with-centered {
+	text-align: center;
+}
+
+.topic-banner {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	padding: 0;
+	margin: 0;
+}
+
+.topic-hero-with-banner .archive-nav {
+	margin: 0.75rem 0 0;
+}
+
+.topic-hero-with-banner .archive-nav a {
+	color: var(--color-inverse-text);
+}
+
+.topic-hero-with-banner .page-title a {
+	color: var(--color-inverse-text);
+}
+
+@media (max-width: 700px) {
+	.topic-shell {
+		max-width: 100%;
+	}
+
+	.topic-hero-with-banner {
+		min-height: 15rem;
+	}
+}

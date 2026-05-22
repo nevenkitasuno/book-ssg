@@ -1,0 +1,300 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+ }
+
+@font-face {
+    font-family: "Mahjong Colored";
+    src: url("fonts/Riichi-Mahjong-Colorful.woff2") format("woff2");
+    font-display: swap;
+}
+
+:root {
+    --font-topic: sans-serif;
+    --color-background: #ffffff;
+    --color-text: #111111;
+    --color-muted: #666;
+    --color-accent: #fa6432;
+    --color-surface: rgba(0, 0, 0, 0.05);
+    --color-inverse-text: #f7f2ec;
+    --color-overlay: #080808;
+    --color-heading: var(--color-text);
+    --color-border: color-mix(in srgb, var(--color-muted) 28%, transparent);
+    --color-border-soft: color-mix(in srgb, var(--color-muted) 18%, transparent);
+    --color-code-bg: color-mix(in srgb, var(--color-surface) 88%, var(--color-background));
+    --color-code-border: color-mix(in srgb, var(--color-muted) 24%, transparent);
+}
+
+html {
+    overflow-y: scroll;
+    height: 100%;
+    font: 100%/1.5 sans-serif;
+    font-family: var(--font-topic);
+    color: var(--color-text);
+    word-wrap: break-word;
+    background-color: var(--color-background);
+    margin: 0 auto;
+    padding: 1.5em;
+ }
+
+@media (min-width: 768px) {
+    html {
+        font-size: 125%;
+        max-width: 42em;
+ } }
+
+h1, h2, h3, h4 {
+    margin: 2.5rem 0 1.5rem 0;
+    line-height: 1.25;
+    color: var(--color-heading);
+ }
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+ }
+a:hover, a:focus, a:active {
+    text-decoration: underline;
+ }
+
+p {
+    margin: 1em 0;
+    line-height: 1.5;
+ }
+p code {
+    background-color: var(--color-code-bg);
+    padding: 0.05em 0.2em;
+    border: 1px solid var(--color-code-border);
+ }
+
+ol, ul {
+    margin: 1em;
+ }
+ol li ol, ol li ul, ul li ol, ul li ul {
+    margin: 0 2em;
+ }
+ol li p, ul li p {
+    margin: 0;
+ }
+
+dl {
+    font-family: monospace, monospace;
+ }
+dl dt {
+    font-weight: bold;
+ }
+dl dd {
+    margin: -1em 0 1em 1em;
+ }
+
+img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    padding: 0.5em;
+ }
+
+.font-mahjong-colored,
+.font-riichi-mahjong-colorful {
+    font-family: "Mahjong Colored", sans-serif;
+}
+
+.font-mahjong-colored-run,
+.font-riichi-mahjong-colorful-run {
+    display: inline;
+    white-space: pre;
+    font-family: "Mahjong Colored", sans-serif;
+    font-size: 1.2em;
+    line-height: 1;
+    vertical-align: baseline;
+    font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+    font-feature-settings: "rlig" 1, "liga" 1, "clig" 1, "calt" 1, "dlig" 1, "ccmp" 1;
+    text-rendering: optimizeLegibility;
+}
+
+.rot-90 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rot-90-char {
+    display: inline-block;
+    font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+    font-feature-settings: "rlig" 1, "liga" 1, "clig" 1, "calt" 1, "dlig" 1, "ccmp" 1;
+    text-rendering: optimizeLegibility;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.topic-banner {
+    width: calc(100% + 1rem);
+    max-width: none;
+    padding: 0;
+    margin: -1.5em -0.5rem 1.5rem -0.5rem;
+}
+
+blockquote {
+    padding-left: 1em;
+    font-style: italic;
+    border-left: solid 1px var(--color-accent);
+ }
+
+table {
+    font-size: 1rem;
+    text-align: left;
+    caption-side: bottom;
+    margin-bottom: 2em;
+ }
+table * {
+    border: none;
+ }
+table thead, table tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+ }
+table tr:nth-child(even) {
+    background-color: var(--color-surface);
+ }
+table tbody {
+    display: block;
+    max-height: 70vh;
+    overflow-y: auto;
+ }
+table td, table th {
+    padding: 0.25em;
+ }
+
+table, .highlight > pre, pre.example, pre.chroma, pre.chroma-chroma {
+    max-height: 70vh;
+    margin: 1em 0;
+    padding: 1em;
+    overflow: auto;
+    font-size: 0.85rem;
+    font-family: monospace, monospace;
+    border: 1px dashed var(--color-border);
+}
+
+pre.chroma code,
+pre.chroma-chroma code {
+    font-family: inherit;
+}
+
+.title {
+    font-size: 2.5em;
+}
+
+.subtitle {
+    font-weight: normal;
+    font-size: 0.75em;
+    color: var(--color-muted);
+}
+
+.tags {
+    margin-top: -1.5rem;
+    padding-bottom: 1.5em;
+}
+.tags li {
+    display: inline;
+    margin-right: 0.5em;
+}
+
+figure {
+    margin: 1em 0;
+}
+figure figcaption {
+    font-family: monospace, monospace;
+    font-size: 0.75em;
+    text-align: center;
+    color: var(--color-muted);
+}
+
+.footnote-definition sup {
+    margin-left: -1.5em;
+    float: left;
+}
+
+.footnote-definition .footnote-body {
+    margin: 1em 0;
+    padding: 0 1em;
+    border: 1px dashed var(--color-border-soft);
+    background-color: var(--color-surface);
+}
+.footnote-definition .footnote-body p:only-child {
+    margin: 0.2em 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header a + a {
+    margin-left: 1rem;
+}
+
+.posts {
+    margin: 0;
+    list-style: none;
+}
+.posts .post a {
+    display: flex;
+    padding: 0.5em 0;
+    color: black;
+}
+.posts .post a:hover, .posts .post a:focus, .posts .post a:active {
+    text-decoration: none;
+    background: var(--color-surface);
+}
+.posts .post date {
+    font-family: monospace, monospace;
+    font-size: 0.8rem;
+    vertical-align: middle;
+    padding-right: 2rem;
+    color: var(--color-muted);
+}
+
+.archive-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 1em 0;
+    padding: 0;
+    list-style: none;
+}
+
+.archive-nav li {
+    margin: 0;
+}
+
+.archive-entries {
+    margin: 1em 0;
+    padding-left: 1.25em;
+}
+
+.archive-entries li + li {
+    margin-top: 0.75em;
+}
+
+.site-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    justify-content: center;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

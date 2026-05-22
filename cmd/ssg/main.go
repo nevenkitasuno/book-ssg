@@ -1,50 +1,36 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 
-	"github.com/nevenkitasuno/blog-ssg/internal/app/site"
-	"github.com/nevenkitasuno/blog-ssg/internal/infra/content"
-	"github.com/nevenkitasuno/blog-ssg/internal/infra/render"
-	"github.com/nevenkitasuno/blog-ssg/internal/infra/state"
+	"blog-ssg/internal/app/sitegen"
 )
 
 func main() {
-	if err := run(); err != nil {
-		log.Fatalf("ssg: %v", err)
+	var contentPath string
+	var outputPath string
+
+	flag.StringVar(&contentPath, "content", "", "path to content directory")
+	flag.StringVar(&outputPath, "output", "", "path to output directory")
+	flag.Parse()
+
+	if err := run(contentPath, outputPath); err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
+		os.Exit(1)
 	}
 }
 
-func run() error {
-	contentDir := flag.String("content", "content", "path to content directory")
-	templatesDir := flag.String("templates", "templates", "path to templates directory")
-	outputDir := flag.String("output", "output", "path to output directory")
-	flag.Parse()
-
-	loader := content.NewLoader(*contentDir)
-	renderer, err := render.NewRenderer(*templatesDir)
-	if err != nil {
-		return err
+func run(contentPath, outputPath string) error {
+	if contentPath == "" {
+		return errors.New("missing required flag: --content")
+	}
+	if outputPath == "" {
+		return errors.New("missing required flag: --output")
 	}
 
-	manifestStore := state.NewManifestStore(*outputDir)
-	builder := site.NewBuilder(loader, renderer, manifestStore, *outputDir)
-
-	result, err := builder.Build()
-	if err != nil {
-		return err
-	}
-
-	fmt.Fprintf(
-		os.Stdout,
-		"generated %d file(s), skipped %d unchanged file(s), removed %d stale file(s)\n",
-		result.Generated,
-		result.Skipped,
-		result.Removed,
-	)
-
-	return nil
+	gen := sitegen.New()
+	return gen.Generate(contentPath, outputPath)
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{.PublicationTitle}}</title>
+<link rel="stylesheet" href="{{.SiteRootPath}}style.css">
+{{if .FaviconPath}}<link rel="icon" href="{{.FaviconPath}}" type="image/x-icon">{{end}}
+<style>{{.ThemeCSS}}</style>
+</head>
+<body class="page-shell">
+<header class="site-header">
+<a class="topic-home" href="{{.TopicHomePath}}">{{.TopicTitle}}</a>
+</header>
+<main class="content-shell">
+<h1 class="page-title">{{.PublicationTitle}}</h1>
+{{if .Tags}}<ul class="tag-list">{{range .Tags}}<li><a href="{{.Href}}">{{.Name}}</a></li>{{end}}</ul>{{end}}
+{{.BodyHTML}}
+{{if or .ShowNext .ShowStart}}<nav class="page-nav">{{if .ShowNext}}<a href="{{.NextPath}}">Далее</a>{{end}}{{if .ShowStart}}<a href="{{.StartPath}}">В начало</a>{{end}}</nav>{{end}}
+</main>
+</body>
+</html>

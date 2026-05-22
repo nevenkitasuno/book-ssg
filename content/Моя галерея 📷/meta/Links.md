@@ -1,3 +1,0 @@
-- [[2026 03 Коты/2.md|Фото котиков]]
-- [Генератор на котором сделан этот блог](https://github.com/nevenkitasuno/blog-ssg/tree/main)
-- [[meta/Ktotam.md|Тук-тук!]]

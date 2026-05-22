@@ -1,0 +1,2 @@
+- [Подробно о риичи-маджонге](http://tesuji-club.ru/)
+- [Telegram – @riichirocks](https://t.me/riichirocks)

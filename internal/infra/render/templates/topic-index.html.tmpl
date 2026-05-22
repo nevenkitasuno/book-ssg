@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{.TopicHeader}}</title>
+<link rel="stylesheet" href="../style.css">
+{{if .FaviconPath}}<link rel="icon" href="{{.FaviconPath}}" type="image/x-icon">{{end}}
+<style>{{.ThemeCSS}}</style>
+</head>
+<body class="page-shell">
+<main class="topic-shell">
+<header class="topic-hero{{if .BannerURL}} topic-hero-with-banner{{end}}">
+{{if .BannerURL}}<img class="topic-banner" src="{{.BannerURL}}" alt="">{{end}}
+<div class="topic-hero-content">
+<h1 class="page-title"><a href=".">{{.TopicHeader}}</a></h1>
+{{if .Links}}<ul class="archive-nav">{{range .Links}}<li><a href="{{.Href}}">{{.Label}}</a></li>{{end}}</ul>{{end}}
+{{if .Years}}<ul class="archive-nav">{{range .Years}}<li><a href="#{{.ID}}">{{.Year}}</a></li>{{end}}</ul>{{end}}
+</div>
+</header>
+{{range .Years}}
+<section id="{{.ID}}" class="year-section">
+<h2>{{.Year}}</h2>
+<div class="year-grid-wrap">
+<div class="card-grid">
+{{range .Cards}}
+<article class="post-card" data-tags="{{.DataTags}}">
+{{if .PreviewURL}}<div class="post-card-media"><a class="post-card-media-link" href="{{.Href}}"><img src="{{.PreviewURL}}" alt=""></a><div class="post-card-overlay">{{if .TagQuery}}<ul class="tag-list tag-list-overlay">{{range .TagQuery}}<li><a href="{{.Href}}">{{.Name}}</a></li>{{end}}</ul>{{end}}
+<h3><a href="{{.Href}}">{{.Title}}</a></h3>
+<p class="post-date">{{.PublishedAt}}</p>
+<p>{{.PreviewText}}</p>
+</div></div>{{else}}<div class="post-card-body">{{if .TagQuery}}<ul class="tag-list">{{range .TagQuery}}<li><a href="{{.Href}}">{{.Name}}</a></li>{{end}}</ul>{{end}}
+<h3><a href="{{.Href}}">{{.Title}}</a></h3>
+<p class="post-date">{{.PublishedAt}}</p>
+<p>{{.PreviewText}}</p>
+ </div>{{end}}
+</article>
+{{end}}
+</div>
+</div>
+</section>
+{{end}}
+<p class="made-with made-with-centered">Made with <a href="https://github.com/nevenkitasuno/blog-ssg/tree/main" rel="noopener noreferrer">nevenkitasuno/blog-ssg</a></p>
+</main>
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const tag = params.get('tag');
+  if (!tag) return;
+  document.querySelectorAll('.year-section').forEach(function(section) {
+    let hasVisibleCards = false;
+    section.querySelectorAll('.post-card').forEach(function(card) {
+      const tags = (card.getAttribute('data-tags') || '').split(/\s+/).filter(Boolean);
+      const isVisible = tags.includes(tag);
+      card.style.display = isVisible ? '' : 'none';
+      if (isVisible) {
+        hasVisibleCards = true;
+      }
+    });
+    if (!hasVisibleCards) {
+      section.style.display = 'none';
+    }
+  });
+  document.querySelectorAll('.archive-nav a[href^="#"]').forEach(function(link) {
+    const target = document.querySelector(link.getAttribute('href'));
+    const item = link.closest('li');
+    if (!target || !item) return;
+    item.style.display = target.style.display === 'none' ? 'none' : '';
+  });
+})();
+</script>
+</body>
+</html>
