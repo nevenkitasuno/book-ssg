@@ -288,7 +288,7 @@ func renderTopicPage(topic content.Topic, site content.Site, page content.TopicP
 		SiteTitle:     siteTitle(site),
 		TopicTitle:    topic.Config.TopicHeader,
 		Title:         page.Title,
-		SiteRootPath:  relativeToRoot(path.Join(topic.Slug, page.Slug, "/")),
+		SiteRootPath:  relativeToRoot(path.Join(topic.Slug, page.Slug, "index.html")),
 		TopicHomePath: relativeFrom(path.Join(topic.Slug, page.Slug, "index.html"), topic.Slug+"/"),
 		ThemeCSS:      themeCSS(topic.Config.Theme),
 		FaviconPath:   relativeFrom(path.Join(topic.Slug, page.Slug, "index.html"), topicFaviconPath(topic, site)),

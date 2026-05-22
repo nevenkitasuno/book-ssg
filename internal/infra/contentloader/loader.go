@@ -243,10 +243,14 @@ func loadTopicMeta(topicPath, metaPath string) ([]content.TopicPage, *content.As
 				return nil, nil, nil, err
 			}
 			pageSlug := slug.Normalize(strings.TrimSuffix(name, filepath.Ext(name)))
+			title, cleanedBody := extractPublicationTitle(string(body))
+			if title == "" {
+				title = slug.Humanize(pageSlug)
+			}
 			pages = append(pages, content.TopicPage{
 				Slug:     pageSlug,
-				Title:    slug.Humanize(pageSlug),
-				Markdown: string(body),
+				Title:    title,
+				Markdown: cleanedBody,
 			})
 		default:
 			other = append(other, content.Asset{

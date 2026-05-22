@@ -52,4 +52,21 @@ func TestLoadSite(t *testing.T) {
 	if !found {
 		t.Fatalf("expected publication mahjong-post to be present")
 	}
+
+	pageFound := false
+	for _, page := range topic.Pages {
+		if page.Slug == "some-page" {
+			if page.Title != "Служебная страница" {
+				t.Fatalf("unexpected topic page title: %q", page.Title)
+			}
+			if strings.Contains(page.Markdown, "# Служебная страница") {
+				t.Fatalf("expected first heading to be removed from topic page body")
+			}
+			pageFound = true
+			break
+		}
+	}
+	if !pageFound {
+		t.Fatalf("expected topic page some-page to be present")
+	}
 }
