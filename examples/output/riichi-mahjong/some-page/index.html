@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Риичи маджонг 🀄️</title>
+<title>Some Page</title>
 <link rel="stylesheet" href="../style.css">
-<link rel="icon" href="assets/meta/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../assets/meta/favicon.ico" type="image/x-icon">
 <style>:root{
 --color-background:#12110f;
 --color-text:#ddd1c4;
@@ -101,61 +101,13 @@
 </style>
 </head>
 <body class="page-shell">
-<main class="topic-shell">
-<header class="topic-hero topic-hero-with-banner">
-<img class="topic-banner" src="assets/meta/top_banner.webp" alt="">
-<div class="topic-hero-content">
-<h1 class="page-title"><a href=".">Риичи маджонг 🀄️</a></h1>
-<ul class="archive-nav"><li><a href="http://tesuji-club.ru/">Подробно о риичи-маджонге</a></li><li><a href="some-page/">Какая-то служебная страница</a></li></ul>
-<ul class="archive-nav"><li><a href="#year-2026">2026</a></li></ul>
-</div>
+<header class="site-header">
+<a class="topic-home" href="..">Риичи маджонг 🀄️</a>
 </header>
+<main class="content-shell">
+<h1 class="page-title">Some Page</h1>
+<p>Просто для примера</p>
 
-<section id="year-2026" class="year-section">
-<h2>2026</h2>
-<div class="year-grid-wrap">
-<div class="card-grid">
-
-<article class="post-card" data-tags="kartinki shrifty">
-<div class="post-card-body"><ul class="tag-list"><li><a href="?tag=kartinki">Картинки</a></li><li><a href="?tag=shrifty">Шрифты</a></li></ul>
-<h3><a href="mahjong-post/">Пост про маджонг</a></h3>
-<p class="post-date">2026-05-03</p>
-<p>Пример использования маджонг шрифта и изображений</p>
- </div>
-</article>
-
-</div>
-</div>
-</section>
-
-<p class="made-with made-with-centered">Made with <a href="https://github.com/nevenkitasuno/blog-ssg/tree/main" rel="noopener noreferrer">nevenkitasuno/blog-ssg</a></p>
 </main>
-<script>
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const tag = params.get('tag');
-  if (!tag) return;
-  document.querySelectorAll('.year-section').forEach(function(section) {
-    let hasVisibleCards = false;
-    section.querySelectorAll('.post-card').forEach(function(card) {
-      const tags = (card.getAttribute('data-tags') || '').split(/\s+/).filter(Boolean);
-      const isVisible = tags.includes(tag);
-      card.style.display = isVisible ? '' : 'none';
-      if (isVisible) {
-        hasVisibleCards = true;
-      }
-    });
-    if (!hasVisibleCards) {
-      section.style.display = 'none';
-    }
-  });
-  document.querySelectorAll('.archive-nav a[href^="#"]').forEach(function(link) {
-    const target = document.querySelector(link.getAttribute('href'));
-    const item = link.closest('li');
-    if (!target || !item) return;
-    item.style.display = target.style.display === 'none' ? 'none' : '';
-  });
-})();
-</script>
 </body>
 </html>
