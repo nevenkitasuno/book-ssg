@@ -18,6 +18,8 @@ func TestGenerate(t *testing.T) {
 
 	expectedFiles := []string{
 		"index.html",
+		"404.html",
+		"_redirects",
 		"style.css",
 		filepath.Join("riichi-mahjong", "index.html"),
 		filepath.Join("riichi-mahjong", "mahjong-post", "index.html"),
@@ -27,6 +29,14 @@ func TestGenerate(t *testing.T) {
 		if _, err := os.Stat(filepath.Join(outputDir, rel)); err != nil {
 			t.Fatalf("expected file %s: %v", rel, err)
 		}
+	}
+
+	redirectsBody, err := os.ReadFile(filepath.Join(outputDir, "_redirects"))
+	if err != nil {
+		t.Fatalf("read redirects fallback: %v", err)
+	}
+	if string(redirectsBody) != "/* /404.html 404\n" {
+		t.Fatalf("unexpected redirects fallback: %q", string(redirectsBody))
 	}
 
 	publicationBody, err := os.ReadFile(filepath.Join(outputDir, "riichi-mahjong", "mahjong-post", "index.html"))

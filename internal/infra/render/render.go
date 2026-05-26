@@ -143,6 +143,7 @@ func Build(site content.Site) ([]GeneratedFile, error) {
 		return nil, err
 	}
 	files = append(files, GeneratedFile{Path: "404.html", Content: notFoundBytes})
+	files = append(files, GeneratedFile{Path: "_redirects", Content: []byte("/* /404.html 404\n")})
 
 	for _, topic := range site.Topics {
 		topicBytes, err := renderTopicIndex(topic, site)

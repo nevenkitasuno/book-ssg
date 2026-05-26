@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" data-site-style>
+<link rel="stylesheet" href="../style.css" data-site-style-fallback>
+<link rel="stylesheet" href="../../style.css" data-site-style-fallback>
+<link rel="stylesheet" href="../../../style.css" data-site-style-fallback>
 {{if .FaviconPath}}<link rel="icon" href="{{.FaviconPath}}" type="image/x-icon">{{end}}
 </head>
 <body class="page-shell">
@@ -15,8 +18,8 @@
 </main>
 <script>
 (function() {
+  const styleLinks = document.querySelectorAll('[data-site-style], [data-site-style-fallback]');
   const link = document.querySelector('[data-topic-home-link]');
-  if (!link) return;
 
   const topics = [{{range $i, $topic := .Topics}}{{if $i}}, {{end}}"{{$topic.Slug}}"{{end}}];
   const segments = window.location.pathname.split('/').filter(Boolean);
@@ -30,11 +33,21 @@
   const topicIndex = decodedSegments.findIndex(function(segment) {
     return topics.includes(segment);
   });
-  if (topicIndex === -1) return;
 
-  const prefix = segments.slice(0, topicIndex).join('/');
-  const topic = segments[topicIndex];
-  link.href = '/' + (prefix ? prefix + '/' : '') + topic + '/';
+  const prefixSegments = topicIndex === -1 ? segments.slice(0, -1) : segments.slice(0, topicIndex);
+  const prefix = prefixSegments.join('/');
+  const siteRoot = '/' + (prefix ? prefix + '/' : '');
+  styleLinks.forEach(function(styleLink) {
+    styleLink.href = siteRoot + 'style.css';
+  });
+
+  if (!link) return;
+
+  if (topicIndex !== -1) {
+    link.href = siteRoot + segments[topicIndex] + '/';
+  } else if (topics.length === 1) {
+    link.href = siteRoot + topics[0] + '/';
+  }
 })();
 </script>
 </body>

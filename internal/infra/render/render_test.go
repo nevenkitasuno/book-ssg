@@ -86,6 +86,7 @@ func TestRenderNotFoundPageLinksToSingleTopicHome(t *testing.T) {
 
 	assertContains(t, string(html), `href="programming/"`)
 	assertContains(t, string(html), `"programming"`)
+	assertContains(t, string(html), `link.href = siteRoot + topics[0] + '/';`)
 }
 
 func TestRenderNotFoundPageCanResolveCurrentTopic(t *testing.T) {
@@ -100,9 +101,12 @@ func TestRenderNotFoundPageCanResolveCurrentTopic(t *testing.T) {
 	}
 
 	assertContains(t, string(html), `href="./"`)
+	assertContains(t, string(html), `href="../style.css"`)
+	assertContains(t, string(html), `href="../../style.css"`)
 	assertContains(t, string(html), `"programming"`)
 	assertContains(t, string(html), `"riichi-mahjong"`)
-	assertContains(t, string(html), `link.href = '/' + (prefix ? prefix + '/' : '') + topic + '/';`)
+	assertContains(t, string(html), `styleLink.href = siteRoot + 'style.css';`)
+	assertContains(t, string(html), `link.href = siteRoot + segments[topicIndex] + '/';`)
 }
 
 func assertContains(t *testing.T, actual string, expected string) {
