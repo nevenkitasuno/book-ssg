@@ -11,7 +11,31 @@
 <main class="content-shell">
 <h1 class="page-title">404</h1>
 <p>Страница не найдена.</p>
-<p><a href="./">На главную</a></p>
+<p><a href="{{.HomePath}}" data-topic-home-link>На главную</a></p>
 </main>
+<script>
+(function() {
+  const link = document.querySelector('[data-topic-home-link]');
+  if (!link) return;
+
+  const topics = [{{range $i, $topic := .Topics}}{{if $i}}, {{end}}"{{$topic.Slug}}"{{end}}];
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  const decodedSegments = segments.map(function(segment) {
+    try {
+      return decodeURIComponent(segment);
+    } catch (_) {
+      return segment;
+    }
+  });
+  const topicIndex = decodedSegments.findIndex(function(segment) {
+    return topics.includes(segment);
+  });
+  if (topicIndex === -1) return;
+
+  const prefix = segments.slice(0, topicIndex).join('/');
+  const topic = segments[topicIndex];
+  link.href = '/' + (prefix ? prefix + '/' : '') + topic + '/';
+})();
+</script>
 </body>
 </html>

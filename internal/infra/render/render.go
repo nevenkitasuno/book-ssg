@@ -110,6 +110,12 @@ type simplePageView struct {
 
 type notFoundPageView struct {
 	FaviconPath string
+	HomePath    string
+	Topics      []notFoundTopicView
+}
+
+type notFoundTopicView struct {
+	Slug string
 }
 
 //go:embed templates/*
@@ -309,9 +315,18 @@ func renderSiteIndex(site content.Site) ([]byte, error) {
 }
 
 func renderNotFoundPage(site content.Site) ([]byte, error) {
-	return executeTemplate("templates/404.html.tmpl", notFoundPageView{
+	homePath := "./"
+	if len(site.Topics) == 1 {
+		homePath = site.Topics[0].Slug + "/"
+	}
+	view := notFoundPageView{
 		FaviconPath: faviconPath(site),
-	})
+		HomePath:    homePath,
+	}
+	for _, topic := range site.Topics {
+		view.Topics = append(view.Topics, notFoundTopicView{Slug: topic.Slug})
+	}
+	return executeTemplate("templates/404.html.tmpl", view)
 }
 
 func siteTitle(site content.Site) string {

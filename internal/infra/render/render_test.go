@@ -3,6 +3,8 @@ package render
 import (
 	"strings"
 	"testing"
+
+	"blog-ssg/internal/domain/content"
 )
 
 func TestRenderMarkdownWithCustomSyntax(t *testing.T) {
@@ -72,6 +74,35 @@ func TestRenderMarkdownExpandsMahjongShorthandAcrossSuits(t *testing.T) {
 	}
 
 	assertContains(t, html, `6s6s7s3m4m6m6m8m2p3p5p7p2z`)
+}
+
+func TestRenderNotFoundPageLinksToSingleTopicHome(t *testing.T) {
+	html, err := renderNotFoundPage(content.Site{
+		Topics: []content.Topic{{Slug: "programming"}},
+	})
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	assertContains(t, string(html), `href="programming/"`)
+	assertContains(t, string(html), `"programming"`)
+}
+
+func TestRenderNotFoundPageCanResolveCurrentTopic(t *testing.T) {
+	html, err := renderNotFoundPage(content.Site{
+		Topics: []content.Topic{
+			{Slug: "programming"},
+			{Slug: "riichi-mahjong"},
+		},
+	})
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	assertContains(t, string(html), `href="./"`)
+	assertContains(t, string(html), `"programming"`)
+	assertContains(t, string(html), `"riichi-mahjong"`)
+	assertContains(t, string(html), `link.href = '/' + (prefix ? prefix + '/' : '') + topic + '/';`)
 }
 
 func assertContains(t *testing.T, actual string, expected string) {
