@@ -1,7 +1,7 @@
 {
   "files": [
-    "_redirects",
     "404.html",
+    "_redirects",
     "favicon.ico",
     "fonts/Riichi-Mahjong-Colorful.woff2",
     "index.html",
@@ -36,7 +36,7 @@
     "programming/meta/Config.yaml": "5ea8087efc73f13e14ecd5e0455dd26c982f14e2e71f248d262b6073a88a7948",
     "programming/meta/favicon.ico": "677d2e5cb8048ba0d79ee273a488819012a02232db725ff361b528e83ef98420",
     "programming/meta/top_banner.webp": "d2e03614cdfea52769779ebfaa9e4c8799cba11f6823a9bfd9472024beb2341c",
-    "riichi-mahjong/2026-05-03-mahjong-post/1.md": "135a184c45d22a19d8bd57a388685e7521ac9e6b88b0fde6a4fd68c38661a12d",
+    "riichi-mahjong/2026-05-03-mahjong-post/1.md": "79dccb1f2b8df0c595d9c1ab9e5e5f287dc65f65d52e58dc9b22b96807417d88",
     "riichi-mahjong/2026-05-03-mahjong-post/image-by-Tairagi-Makoto.png": "2b9f76b608944a85d9a392928be3eb9df7ee84cce7ba3c8e43151feaac1c6e84",
     "riichi-mahjong/meta/Config.yaml": "b7a9b451bc7f5aa15af1e1fb125888fd8ac340123af4cb3dce4373dcb59986ec",
     "riichi-mahjong/meta/Links.md": "3643ebc45fef52e06c76733f7895693023e59c2db5a861067e5f5d2d3b98aac3",
@@ -45,5 +45,5 @@
     "riichi-mahjong/meta/top_banner.webp": "a5be1a12cf51cc24d2ad29f0093b8244d06385e62f20376c775221a88eede7f0",
     "style.css": "06dc172635a53d24a84c9516d1349f05031a568ce63e5f5bd6852c9072751c72"
   },
-  "generator_hash": "9a4c0b08c0108a1c905c3b11458a269285e35eda06c9598e23c2755928cddce6"
+  "generator_hash": "1ca1341dd048b6ea3f7fbc2d9778ab95415a9c61ad79b7ecefe43a5781bd5990"
 }

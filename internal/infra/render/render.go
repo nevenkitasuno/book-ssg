@@ -449,7 +449,7 @@ func renderMarkdown(input string, ctx markdownContext) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	extensions := markdownparser.CommonExtensions | markdownparser.AutoHeadingIDs
+	extensions := markdownparser.CommonExtensions | markdownparser.AutoHeadingIDs | markdownparser.Footnotes
 	parser := markdownparser.NewWithExtensions(extensions)
 	renderer := markdownhtml.NewRenderer(markdownhtml.RendererOptions{
 		Flags:          markdownhtml.CommonFlags,

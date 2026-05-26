@@ -58,6 +58,18 @@ func TestRenderMarkdownHighlightsFencedCodeBlock(t *testing.T) {
 	assertContains(t, html, `class="chroma-k"`)
 }
 
+func TestRenderMarkdownFootnotes(t *testing.T) {
+	html, err := renderMarkdown("Текст со сноской[^1a].\n\n[^1a]: Пример сноски.", markdownContext{})
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	assertContains(t, html, `class="footnote-ref"`)
+	assertContains(t, html, `href="#fn:1a"`)
+	assertContains(t, html, `<div class="footnotes">`)
+	assertContains(t, html, `<li id="fn:1a">Пример сноски.</li>`)
+}
+
 func TestRenderMarkdownExpandsMahjongShorthandInsideFontTag(t *testing.T) {
 	html, err := renderMarkdown(`[font="Riichi-Mahjong-Colorful"]667s[/font]`, markdownContext{})
 	if err != nil {
